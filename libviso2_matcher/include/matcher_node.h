@@ -37,6 +37,9 @@
 #include "libviso2_matcher_wrapper.h"
 #include "feature_manager.h"
 
+#include <dynamic_reconfigure/server.h>
+#include <libviso2_matcher/matcher_parametersConfig.h>
+
 class MatcherNode
 {
 public:
@@ -56,8 +59,6 @@ protected:
 private:
 	void drawKeypoints(cv::Mat& frame);
 
-private:
-
 	// feature matcher
 	libviso2MatcherWrapper *_matcher;
 	bool _first;
@@ -65,13 +66,24 @@ private:
 	// id manader
 	FeatureManager _fmanager;
 
-	//Ros management
-	image_transport::ImageTransport it;
-	image_transport::Subscriber imageSubscriber;
+	// ros stuff
+	ros::NodeHandle _nh;
+
+	image_transport::ImageTransport _it;
+	image_transport::Subscriber _imageSubscriber;
+
+	ros::Publisher _featurePublisher;
 
 	//debug display
 	std::string src_window;
 	bool hideNew;
+
+	//stuff for dynamic reconfigure
+  dynamic_reconfigure::Server<libviso2_matcher::matcher_parametersConfig> _dcfg_server;
+  dynamic_reconfigure::Server<libviso2_matcher::matcher_parametersConfig>::CallbackType _dcfg_f;
+
+  void dcfgCallback(libviso2_matcher::matcher_parametersConfig &config, uint32_t level);
+
 };
 
 #endif /* EXTRACTOR_H_ */

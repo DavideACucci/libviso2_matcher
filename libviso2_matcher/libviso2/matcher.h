@@ -68,7 +68,7 @@ public:
   };
 
   // constructor (with default parameters)
-  Matcher(parameters param);
+  Matcher(const parameters &param);
 
   // deconstructor
   ~Matcher();
@@ -97,6 +97,8 @@ public:
             u1p(u1p),v1p(v1p),i1p(i1p),u2p(u2p),v2p(v2p),i2p(i2p),
             u1c(u1c),v1c(v1c),i1c(i1c),u2c(u2c),v2c(v2c),i2c(i2c) {}
   };
+
+  void updateParameters(const parameters &param);
 
   // computes features from left/right images and pushes them back to a ringbuffer,
   // which interally stores the features of the current and previous image pair

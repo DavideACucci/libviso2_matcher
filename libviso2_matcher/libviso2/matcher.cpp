@@ -30,7 +30,7 @@ using namespace std;
 //////////////////////
 
 // constructor (with default parameters)
-Matcher::Matcher(parameters param) : param(param) {
+Matcher::Matcher(const parameters &param) {
 
   // init match ring buffer to zero
   m1p1 = 0; n1p1 = 0;
@@ -55,9 +55,17 @@ Matcher::Matcher(parameters param) : param(param) {
   // margin needed to compute descriptor + sobel responses
   margin = 5+1;
   
+  updateParameters(param);
+
+}
+
+void Matcher::updateParameters(const parameters &p) {
+  param = p;
+
   // adjust match radius on half resolution
   if (param.half_resolution)
     this->param.match_radius /= 2;
+
 }
 
 // deconstructor

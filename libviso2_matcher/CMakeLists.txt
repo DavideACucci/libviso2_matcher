@@ -3,11 +3,17 @@ cmake_minimum_required(VERSION 2.8.3)
 find_package(catkin REQUIRED COMPONENTS roscpp
                                         cv_bridge 
                                         image_transport
+                                        dynamic_reconfigure
+                                        libviso2_matcher_msgs
                                         )
                                         
 find_package(OpenCV REQUIRED)
 
 project(libviso2_matcher)
+
+generate_dynamic_reconfigure_options(
+  cfg/matcher_parameters.cfg
+)
 
 catkin_package()
 
@@ -26,4 +32,4 @@ add_executable(matcher_node 			 src/matcher_node.cpp
 
 target_link_libraries(matcher_node ${catkin_LIBRARIES} libviso2)
 
-add_dependencies(matcher_node ${catkin_EXPORTED_TARGETS})
+add_dependencies(matcher_node ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)

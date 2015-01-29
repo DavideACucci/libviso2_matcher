@@ -1,0 +1,4 @@
+# Message to send a single feature, with coordinates, confidence and Lowe ratio
+geometry_msgs/Point point
+uint64 id
+
