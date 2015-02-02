@@ -138,6 +138,11 @@ void MatcherNode::drawKeypoints(Mat& frame) {
 
     Point2f pt(it->second.u, it->second.v);
     circle(frame, pt, 3, drawColor);
+
+    stringstream s;
+    s << it->second.unique_id;
+
+    putText(frame, s.str(), pt, 1, 1.0, drawColor);
   }
 }
 

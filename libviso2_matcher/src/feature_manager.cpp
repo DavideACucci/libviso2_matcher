@@ -49,7 +49,7 @@ void FeatureManager::updateFeatures(
 
     if (f != _features->end()) {
       newf.n_obs = f->second.n_obs + 1;
-      newf.unique_id = f->first;
+      newf.unique_id = f->second.unique_id;
     } else {
       newf.n_obs = 1;
       newf.unique_id = ++_max_id;
